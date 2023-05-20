@@ -1,1 +1,1 @@
-This code is a CNN that will classified if the image is a dog or a cat.
+This code is a CNN that will classified if the image is cloudy, rain, sunshine, and sunrise.
