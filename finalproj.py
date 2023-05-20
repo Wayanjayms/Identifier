@@ -1,31 +1,30 @@
 import streamlit as st
+import tensorflow as tf
 
-@st.cache(allow_output_mutation=True)
+@st.cache_resource
 def load_model():
-  model=tf.keras.models.load_model(os.path.join('/content/drive/MyDrive/Models','Dog_or_Cat_classifier.h5'))
+  model=tf.keras.models.load_model('Weather_classification.h5')
   return model
-model=tf.keras.models.load_model(os.path.join('/content/drive/MyDrive/Models','Dog_or_Cat_classifier.h5'))
-st.write("""
-# Dog or cat classifier"""
-)
-file=st.file_uploader("Choose a photo of your fur baby from computer",type=["jpg","png"])
-#A
+model=load_model()
+st.write("""# Weather Classifier""")
+file=st.file_uploader("Upload a photo of your environment.",type=["jpg","png"])
+
 import cv2
 from PIL import Image,ImageOps
 import numpy as np
 def import_and_predict(image_data,model):
-    size=(64,64)
+    size=(60,60)
     image=ImageOps.fit(image_data,size,Image.ANTIALIAS)
     img=np.asarray(image)
     img_reshape=img[np.newaxis,...]
     prediction=model.predict(img_reshape)
     return prediction
 if file is None:
-    st.text("Please upload an image file")
+    st.text("Please upload an image file.")
 else:
     image=Image.open(file)
     st.image(image,use_column_width=True)
     prediction=import_and_predict(image,model)
-    class_names=['Dog','Cat']
+    class_names = ['Cloudy', 'Rain', 'Shine', 'Sunrise']
     string="OUTPUT : "+class_names[np.argmax(prediction)]
     st.success(string)
