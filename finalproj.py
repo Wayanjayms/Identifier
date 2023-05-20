@@ -1,5 +1,4 @@
 import streamlit as st
-import tensorflow as tf
 
 @st.cache_resource
 def load_model():
