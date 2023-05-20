@@ -6,7 +6,8 @@ def load_model():
   model=tf.keras.models.load_model('Weather_classification.h5')
   return model
 model=load_model()
-st.write("""# Weather Classifier""")
+st.write("""# Weather Classifier
+""")
 file=st.file_uploader("Upload a photo of your environment.",type=["jpg","png"])
 
 import cv2
